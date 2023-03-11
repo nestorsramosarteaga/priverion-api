@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Resources\V1\EmployeeResource;
 use Illuminate\Http\Request;
 use App\Models\Employee;
@@ -14,7 +16,7 @@ class EmployeeController extends Controller
         return EmployeeResource::collection(Employee::latest()->paginate());
     }
 
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
         $fields = $request->all();
 
@@ -39,7 +41,7 @@ class EmployeeController extends Controller
         return new EmployeeResource($employee);
     }
 
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
         $fields = $request->all();
 
