@@ -24,7 +24,7 @@ class EmployeeController extends Controller
 
             return response()->json([
                 'message'=>'Employee Created Successfully!!',
-                'data' => $employee
+                'data' => new EmployeeResource($employee)
             ]);
         
         } catch (\Exception $e){
@@ -41,12 +41,14 @@ class EmployeeController extends Controller
 
     public function update(Request $request, Employee $employee)
     {
+        $fields = $request->all();
+
         try {
-            $employee->update($request->input());
+            $employee->update($fields);
 
             return response()->json([
                 'message'=>'Employee Updated Successfully!!',
-                'data' => $employee
+                'data' => new EmployeeResource($employee)
             ]);
 
         } catch (\Exception $e){
