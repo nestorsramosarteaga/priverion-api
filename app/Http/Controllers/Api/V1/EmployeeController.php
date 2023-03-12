@@ -13,7 +13,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        return EmployeeResource::collection(Employee::latest()->paginate());
+        return EmployeeResource::collection(Employee::latest()->get());
     }
 
     public function store(StoreEmployeeRequest $request)
@@ -31,7 +31,8 @@ class EmployeeController extends Controller
         
         } catch (\Exception $e){
             return response()->json([
-                'message'=>'Something went wrong while creating an employee!'
+                'message'=>'Something went wrong while creating an employee!',
+                'errors' => $e->getMessage()
             ], 500);
         }
     }
@@ -55,7 +56,8 @@ class EmployeeController extends Controller
 
         } catch (\Exception $e){
             return response()->json([
-                'message'=>'Something went wrong while updating an employee!'
+                'message'=>'Something went wrong while updating an employee!',
+                'errors' => $e->getMessage()
             ], 500);
         }
     }
