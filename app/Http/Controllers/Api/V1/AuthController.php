@@ -18,7 +18,11 @@ class AuthController extends Controller
         if(Auth::attempt($request->only('email', 'password'))){
             return response()->json([
                 'token' => $request->user()->createToken($request->email)->plainTextToken,
-                'message' => 'Success'
+                'message' => 'Success',                
+                'id'=> $request->user()->id,
+                'name' => $request->user()->name,
+                'email'=> $request->user()->email,
+                'is_admin'=> $request->user()->is_admin,
             ]);
         }
 
